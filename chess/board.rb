@@ -48,6 +48,7 @@ class Board
     def move_piece(start_pos, end_pos)
         raise "there is no piece at the position" if empty?(start_pos)
         raise "not a valid move" if !valid?(end_pos)
+        raise "there is a piece here" if !end_pos.nil?
 
        current_piece = self[start_pos]
        self[end_pos] = current_piece
