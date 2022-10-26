@@ -1,28 +1,17 @@
 require_relative "./Piece.rb"
+require_relative "./Queen.rb"
+require_relative "./Bishop.rb"
+require_relative "./Rook.rb"
+require_relative "./King.rb"
+require_relative "./Knight.rb"
 
 class Board 
     attr_reader :grid
     def initialize
         @grid = Array.new(8) {Array.new(8)}
-        @nullpiece = NullPiece.new
+        @nullpiece = nil
         #top row
-        @grid[0][0] = Piece.new("Rook")
-        @grid[0][1] = Piece.new("Knight")
-        @grid[0][2] = Piece.new("Bishop")
-        @grid[0][3] = Piece.new("Queen")
-        @grid[0][4] = Piece.new("King")
-        @grid[0][5] = Piece.new("Bishop")
-        @grid[0][6] = Piece.new("Knight")
-        @grid[0][7] = Piece.new("Rook")
-        #bottom row
-        @grid[7][0] = Piece.new("Rook")
-        @grid[7][1] = Piece.new("Knight")
-        @grid[7][2] = Piece.new("Bishop")
-        @grid[7][3] = Piece.new("Queen")
-        @grid[7][4] = Piece.new("King")
-        @grid[7][5] = Piece.new("Bishop")
-        @grid[7][6] = Piece.new("Knight")
-        @grid[7][7] = Piece.new("Rook")
+       
     end
 
     def [](pos)
@@ -51,6 +40,10 @@ class Board
         end
         return false
     end
+
+    def add_piece(piece,pos)
+        self[pos] = piece if empty?(pos)
+    end
     
     def move_piece(start_pos, end_pos)
         raise "there is no piece at the position" if empty?(start_pos)
@@ -62,5 +55,25 @@ class Board
 
     end
 
+    def render   
+        @grid[0][0] = Rook.new(:white, self, [0,0])
+        @grid[0][1] = Knight.new(:white, self, [0,1])
+        @grid[0][2] = Bishop.new(:white, self, [0,2])
+        @grid[0][3] = Queen.new(:white, self, [0,3])
+        @grid[0][4] = King.new(:white, self, [0,4])
+        @grid[0][5] = Bishop.new(:white, self, [0,5])
+        @grid[0][6] = Knight.new(:white, self, [0,6])
+        @grid[0][7] = Rook.new(:white, self, [0,7])
+        # #bottom row
+        @grid[7][0] = Rook.new(:black, self, [7,0])
+        @grid[7][1] = Knight.new(:black, self, [7,1])
+        @grid[7][2] = Bishop.new(:black, self, [7,2])
+        @grid[7][3] = Queen.new(:black, self, [7,3])
+        @grid[7][4] = King.new(:black, self, [7,4])
+        @grid[7][5] = Bishop.new(:black, self, [7,5])
+        @grid[7][6] = Knight.new(:black, self, [7,6])
+        @grid[7][7] = Rook.new(:black, self, [7,7])
+    end
 
 end
+

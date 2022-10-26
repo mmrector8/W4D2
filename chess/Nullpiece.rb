@@ -1,4 +1,4 @@
-require_relative "Nullpiece"
+require_relative "Piece"
 
 class NullPiece < Piece
     include Singleton
