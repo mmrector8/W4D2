@@ -78,3 +78,7 @@ class Board
 
 end
 
+# #
+
+# b = Board.new 
+# b[[2,2]].moves
